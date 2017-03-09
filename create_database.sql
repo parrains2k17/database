@@ -37,13 +37,13 @@ CREATE TABLE `elus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS parrainages (
-   Civilite              VARCHAR(255) NOT NULL
-  ,Nom                   VARCHAR(255) NOT NULL
-  ,Prenom                VARCHAR(255) NOT NULL
-  ,Mandat                VARCHAR(255) NOT NULL
+   Civilite              VARCHAR(255)
+  ,Nom                   VARCHAR(255)
+  ,Prenom                VARCHAR(255)
+  ,Mandat                VARCHAR(255)
   ,Circonscription       VARCHAR(255)
-  ,Departement           VARCHAR(255) NOT NULL
-  ,Candidate_parrainee   VARCHAR(255) NOT NULL
+  ,Departement           VARCHAR(255)
+  ,Candidate_parrainee   VARCHAR(255)
   ,Date_de_publication   VARCHAR(255)
 );
 
@@ -150,3 +150,139 @@ CREATE TABLE IF NOT EXISTS communes (
   ,DYN_SetC                                                           VARCHAR(255)
   ,CP                                                                 VARCHAR(10)
 ) DEFAULT CHARSET=latin1_general_ci;
+
+CREATE TABLE IF NOT EXISTS parrainages_yannc (
+   Candidate                  VARCHAR(255)
+  ,Date_de_publication        VARCHAR(255)
+  ,Localisation               VARCHAR(255)
+  ,Representation             VARCHAR(255)
+  ,Mandat                     VARCHAR(255)
+  ,Sexe                       VARCHAR(255)
+  ,Prenom                     VARCHAR(255)
+  ,Nom                        VARCHAR(255)
+  ,Identifiant_region         VARCHAR(255)
+  ,Region                     VARCHAR(255)
+  ,Identifiant_departement    VARCHAR(255)
+  ,Departement                VARCHAR(255)
+  ,Commune_ou_circonscription VARCHAR(255)
+  ,Identifiant                VARCHAR(255)
+  ,Population_en_2014         FLOAT
+  ,Taille_de_la_commune       VARCHAR(255)
+  ,Geocode                    VARCHAR(255)
+  ,Prenom_de_ladu_candidate   VARCHAR(255)
+  ,Nom_de_ladu_candidate      VARCHAR(255)
+  ,Image                      VARCHAR(255)
+  ,Credit_de_limage           VARCHAR(255)
+  ,Candidate_image_droit      VARCHAR(255)
+  ,Source_de_limage           VARCHAR(255)
+  ,Site_internet_candidate    VARCHAR(255)
+  ,Partimouvement_candidate   VARCHAR(255)
+  ,Page_wikipedia_candidate   VARCHAR(255)
+  ,Zone_geographique          VARCHAR(255)
+  ,Publication                VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS poste (
+   Code_commune_INSEE   VARCHAR(255)
+  ,Nom_commune          VARCHAR(255)
+  ,Code_postal          VARCHAR(255)
+  ,Libelle_acheminement VARCHAR(255)
+  ,Ligne_5              VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS votes_communes_tour1 (
+   Date_de_lexport          VARCHAR(255)
+  ,Code_du_departement      VARCHAR(255)
+  ,Libelle_du_département   VARCHAR(255)
+  ,Code_de_la_commune       VARCHAR(255)
+  ,Libelle_de_la_commune    VARCHAR(255)
+  ,Inscrits                 INTEGER
+  ,Abstentions              INTEGER
+  ,_AbsIns                  FLOAT
+  ,Votants                  INTEGER
+  ,_VotIns                  FLOAT
+  ,Blancs_et_nuls           INTEGER
+  ,_BlNulsIns               FLOAT
+  ,_BlNulsVot               FLOAT
+  ,Exprimés                 INTEGER
+  ,_ExpIns                  FLOAT
+  ,_ExpVot                  FLOAT
+  ,Voix_JOLY                INTEGER
+  ,_VoixIns_JOLY            FLOAT
+  ,_VoixExp_JOLY            FLOAT
+  ,Voix_LE_PEN              INTEGER
+  ,_VoixIns_LE_PEN          FLOAT
+  ,_VoixExp_LE_PEN          FLOAT
+  ,Voix_SARKOZY             INTEGER
+  ,_VoixIns_SARKOZY         FLOAT
+  ,_VoixExp_SARKOZY         FLOAT
+  ,Voix_MELENCHON           INTEGER
+  ,_VoixIns_MELENCHON       FLOAT
+  ,_VoixExp_MELENCHON       FLOAT
+  ,Voix_POUTOU              INTEGER
+  ,_VoixIns_POUTOU          FLOAT
+  ,_VoixExp_POUTOU          FLOAT
+  ,Voix_ARTHAUD             INTEGER
+  ,_VoixIns_ARTHAUD         FLOAT
+  ,_VoixExp_ARTHAUD         FLOAT
+  ,Voix_CHEMINADE           INTEGER
+  ,_VoixIns_CHEMINADE       FLOAT
+  ,_VoixExp_CHEMINADE       FLOAT
+  ,Voix_BAYROU              INTEGER
+  ,_VoixIns_BAYROU          FLOAT
+  ,_VoixExp_BAYROU          FLOAT
+  ,Voix_DUPONTAIGNAN        INTEGER
+  ,_VoixIns_DUPONTAIGNAN    FLOAT
+  ,_VoixExp_DUPONTAIGNAN    FLOAT
+  ,Voix_HOLLANDE            INTEGER
+  ,_VoixIns_HOLLANDE        FLOAT
+  ,_VoixExp_HOLLANDE        FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS votes_communes_tour2 (
+   date_publication                        VARCHAR(255)
+  ,type_election                           VARCHAR(255)
+  ,annee_election                          INTEGER
+  ,code_region                             VARCHAR(255)
+  ,code_region_3car                        VARCHAR(255)
+  ,nom_region                              VARCHAR(255)
+  ,code_departement                        VARCHAR(255)
+  ,code_mon_dep                            VARCHAR(255)
+  ,code_departement_3car                   VARCHAR(255)
+  ,nom_departement                         VARCHAR(255)
+  ,code_commune                            VARCHAR(255)
+  ,nom_commune                             VARCHAR(255)
+  ,num_tour                                INTEGER
+  ,jour                                    INTEGER
+  ,mois                                    INTEGER
+  ,annee                                   INTEGER
+  ,nb_inscrits                             INTEGER
+  ,nb_abstentionnistes                     INTEGER
+  ,rapport_abstentionsurinscrits           FLOAT
+  ,nb_votants                              INTEGER
+  ,rapport_votantssurinscrits                 FLOAT
+  ,nb_blancs_et_nuls                       INTEGER
+  ,rapport_blancsnulssurinscrits              FLOAT
+  ,rapport_blancsnulssurvotants               FLOAT
+  ,nb_exprimes                             INTEGER
+  ,rapport_exprimessurinscrits                FLOAT
+  ,rapport_exprimessurvotants                 FLOAT
+  ,nb_voix_candidat_HOLLANDE               INTEGER
+  ,rapport_voix_candidat_HOLLANDEexprimes  FLOAT
+  ,nb_voix_candidat_SARKOZY                INTEGER
+  ,rapport_voix_candidat_SARKOZYexprimes   FLOAT
+  ,Resultat                                VARCHAR(255)
+);
+
+CREATE TABLE maires (
+   codeinsee VARCHAR(255)
+  ,libdpt    VARCHAR(255)
+  ,libsubcom VARCHAR(255)
+  ,popsubcom INTEGER
+  ,nompsn    VARCHAR(255)
+  ,prepsn    VARCHAR(255)
+  ,civpsn    VARCHAR(255)
+  ,naissance VARCHAR(255)
+  ,csp       INTEGER
+  ,libcsp    VARCHAR(255)
+);
