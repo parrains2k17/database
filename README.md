@@ -10,3 +10,9 @@ vi .env # change password
 ./run.sh
 ```
 
+# Create tables
+
+Use `create_database.sql`.
+
+Import corresponding data from .csv files (be sure float use '.' and not ',').
+
