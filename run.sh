@@ -1,8 +1,8 @@
 
-mkdir -p data
+mkdir -p postgredata
 docker run \
-    --name parrains-db \
+    --name parrains-postgresql \
     --env-file .env \
     -p 3306:3306 \
-    -v $(pwd)/data:/var/lib/mysql \
-    -d mysql:5.7.17
+    -v $(pwd)/postgredata:/var/lib/postgresql \
+    -d postgre:9.6.2
