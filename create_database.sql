@@ -286,3 +286,21 @@ CREATE TABLE maires (
   ,csp       INTEGER
   ,libcsp    VARCHAR(255)
 );
+
+CREATE TABLE departements (
+    code_int INTEGER,
+    code_departement VARCHAR(255),
+    nom VARCHAR(255),
+    nom_upper VARCHAR(255),
+    nom_lower VARCHAR(255),
+    matricule VARCHAR(255)
+);
+
+CREATE TABLE regions (
+    REGION INTEGER,
+    CHEFLIEU VARCHAR(255),
+    TNCC INTEGER,
+    NCC VARCHAR(255),
+    NCCENR VARCHAR(255)
+);
+
