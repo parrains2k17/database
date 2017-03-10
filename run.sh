@@ -3,6 +3,6 @@ mkdir -p postgredata
 docker run \
     --name parrains-postgresql \
     --env-file .env \
-    -p 3306:3306 \
+    -p 5432:5432 \
     -v $(pwd)/postgredata:/var/lib/postgresql \
-    -d postgre:9.6.2
+    -d postgres:9.6.2
