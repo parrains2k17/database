@@ -340,3 +340,25 @@ CREATE TABLE chomage (
     C_2014 FLOAT,
     C_2015 FLOAT
 );
+
+CREATE TABLE parrainages_enrichis (
+	nom VARCHAR(255),
+	prenom VARCHAR(255),
+	sexe BOOLEAN,
+	date_publication VARCHAR(255),
+	date_naissance VARCHAR(255),
+	csp VARCHAR(255),
+	liste VARCHAR(255),
+
+	nom_commune VARCHAR(255),
+	code_insee VARCHAR(255),
+	pop_commune VARCHAR(255),
+	urbanite_ruralite VARCHAR(255),
+	score_urbanite VARCHAR(255),
+	taux_chomage VARCHAR(255),
+
+	code_departement VARCHAR(255),
+	nom_departement VARCHAR(255),
+
+	candidat VARCHAR(255)
+);
