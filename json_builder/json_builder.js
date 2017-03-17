@@ -49,11 +49,38 @@ const getCandidateSupporters = (connection) => (candidat) => new Promise((resolv
         resolve({
             name: candidat,
             parrainages: results,
-            total: results.length,
+            total_maires: results.length,
         });
     });
  
 });
+
+const getCandidateTotalSupporters = (connection) => (candidat) => new Promise((resolve, reject) => {
+    connection.query({
+        sql: 'SELECT COUNT(*) as count FROM `parrainages` WHERE `Candidate_parrainee` = ?',
+        timeout: 36000, // 36.000s :-) 
+        values: candidat
+    }, function (error, results, fields) {
+        if (error) {
+            reject(error);
+            return;
+        }
+
+        resolve({
+            total_parrainages: results[0].count,
+        });
+    });
+});
+
+const getCandidateInfo = (connection) => (candidat) => Promise.all(
+        [getCandidateSupporters(connection)(candidat), getCandidateTotalSupporters(connection)(candidat)]
+    )
+    .then((results) => ({
+        name: results[0].name,
+        total_parrainages: results[1].total_parrainages,
+        total_maires: results[0].total_maires,
+        parrainages: results[0].parrainages,
+    }));
 
 const saveResults = (result) =>  new Promise((resolve, reject) => {
     const data = {};
@@ -81,7 +108,7 @@ connection.connect(function(err) {
 
     console.log('connected as id ' + connection.threadId);
 
-    Promise.all(candidats.map(getCandidateSupporters(connection)))
+    Promise.all(candidats.map(getCandidateInfo(connection)))
         .then(saveResults)
         .catch(console.error)
         .then(() => {
