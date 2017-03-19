@@ -124,9 +124,11 @@ const population = (pop) => {
         return '1 000 à 2 000 habitants';
     } else if (pop < 10000) {
         return '2 000 à 10 000 habitants';
-    } else {
+    } else if (pop < 40000000) {
         return 'Plus de 10 000 habitants';
     }
+
+    return 'Inconnue';
 };
 
 const urbanite = (score) => {
@@ -151,6 +153,8 @@ const chomage = (taux) => {
     } else if (taux >= 15) {
         return 'Plus de 15%';
     }
+
+    return 'Inconnu';
 };
 
 const getCandidateSupporters = (connection) => (candidat) => new Promise((resolve, reject) => {
