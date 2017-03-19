@@ -55,6 +55,14 @@ const stringToFloat = (n) => {
     return null;
 };
 
+const gender = (code) => {
+    if (code === null || code === undefined) {
+        return 'Inconnu';
+    }
+
+    return code === 'Mme' ? 'Femmes' : 'Hommes';
+};
+
 const age = (n) => {
     if (n === null || n === undefined) {
         return 'Inconnu';
