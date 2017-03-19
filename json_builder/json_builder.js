@@ -197,14 +197,13 @@ const getCandidateTotalSupporters = (connection) => (candidat) =>
 const readParrainages = (parrainages) => {
     const newParrainages = parrainages;
     newParrainages.forEach((p) => {
-        p.age = NOW - moment(p.date_naissance, 'YYYY-MM-DD').year();
-        p.age_category = AGES.reduce((found, age) => (
-            (p.age <= age && !found) ? age : found
-        ), null)
-        p.csp_name = csp(stringToInt(p.csp));
-        p.population = population(stringToInt(p.pop_commune));
-        p.urbainite = urbanite(stringToFloat(p.score_urbanite));
-        p.chomage = chomage(stringToFloat(p.taux_chomage));
+        p.age          = NOW - moment(p.date_naissance, 'YYYY-MM-DD').year();
+        p.age_category = age(p.age);
+        p.csp_name     = csp(stringToInt(p.csp));
+        p.population   = population(stringToInt(p.pop_commune));
+        p.urbainite    = urbanite(stringToFloat(p.score_urbanite));
+        p.chomage      = chomage(stringToFloat(p.taux_chomage));
+        p.sexe         = gender(p.civilite);
     });
 
     return newParrainages;
