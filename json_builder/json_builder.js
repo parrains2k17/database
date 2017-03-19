@@ -102,7 +102,7 @@ const csp = (code) => {
         return 'Personnels des entreprises publiques';
     } else if (code < 58) {
         return 'Divers';
-    } else if (code <= 65) {
+    } else if (code >= 58) {
         return 'Retraités';
     }
 
