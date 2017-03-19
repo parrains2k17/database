@@ -133,10 +133,10 @@ const population = (pop) => {
 
 const urbanite = (score) => {
     if (score === null || score === undefined) {
-        return 'Inconnue';
+        return 'Inconnu';
     }
 
-    return (score > 0) ? 'Commune urbaine' : 'Commune rurale';
+    return (score > 0) ? 'urbaine' : 'rurale';
 };
 
 const chomage = (taux) => {
