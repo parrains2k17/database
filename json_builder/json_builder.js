@@ -55,7 +55,25 @@ const stringToFloat = (n) => {
     return null;
 };
 
-const AGES = [29, 44, 59, 74, 999];
+const age = (n) => {
+    if (n === null || n === undefined) {
+        return 'Inconnu';
+    }
+
+    if (n < 29) {
+        return 'Moins de 29 ans';
+    } else if (n < 44) {
+        return '30 à 44 ans';
+    } else if (n < 59) {
+        return '45 à 59 ans';
+    } else if (n < 74) {
+        return '60 à 74 ans';
+    } else if (n >= 74) {
+        return '75 ans et plus';
+    }
+
+    return 'Inconnu';
+};
 
 const csp = (code) => {
     if (code === null || code === undefined) {
