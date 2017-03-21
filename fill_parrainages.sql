@@ -8,6 +8,7 @@ SELECT
 	m.naissance										as date_naissance,
 	m.csp,
 	e.codnualiste									as liste,
+	p.Mandat 										as mandat,
 
 	# commune
 	p.Circonscription			as nom_commune,
