@@ -349,6 +349,7 @@ CREATE TABLE parrainages_enrichis (
 	date_naissance VARCHAR(255),
 	csp VARCHAR(255),
 	liste VARCHAR(255),
+  mandat VARCHAR(255),
 
 	nom_commune VARCHAR(255),
 	code_insee VARCHAR(255),
