@@ -33,7 +33,4 @@ LEFT JOIN maires m					ON m.codeinsee = c.CODGEO
 LEFT JOIN elus e 		 			ON p.Nom = e.nompsn AND p.Prenom = e.prepsn AND p.Circonscription = e.libsubcom AND d.code_departement = e.coddpt
 
 LEFT JOIN communes_appartenance ca  ON (c.CODGEO = ca.CODGEO OR CONCAT('0', c.CODGEO) = ca.CODGEO)
-LEFT JOIN chomage co				ON ca.ZONE_EMPLOI = co.ZONE_EMPLOI
-
-WHERE
-	p.Mandat = 'Maire';
+LEFT JOIN chomage co				ON ca.ZONE_EMPLOI = co.ZONE_EMPLOI;
