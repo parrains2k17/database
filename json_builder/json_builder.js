@@ -136,7 +136,7 @@ const urbanite = (score) => {
         return 'Inconnu';
     }
 
-    return (score > 0) ? 'urbaine' : 'rurale';
+    return (score > 0) ? 'Urbaine' : 'Rurale';
 };
 
 const chomage = (taux) => {
@@ -155,6 +155,21 @@ const chomage = (taux) => {
     }
 
     return 'Inconnu';
+};
+
+const mandat = (mdt) => {
+    if (
+        mdt === 'Maire'                          || 
+        mdt === 'Conseiller/ère départemental-e' || 
+        mdt === 'Conseiller/ère régional-e'      || 
+        mdt === 'Maire délégué-e'                || 
+        mdt === 'Député-e'                       || 
+        mdt === 'Sénateur/trice'
+    ) {
+        return mdt;
+    }
+
+    return 'Autre';
 };
 
 const getCandidateSupporters = (connection) => (candidat) => new Promise((resolve, reject) => {
@@ -204,6 +219,7 @@ const readParrainages = (parrainages) => {
         p.urbainite    = urbanite(stringToFloat(p.score_urbanite));
         p.chomage      = chomage(stringToFloat(p.taux_chomage));
         p.sexe         = gender(p.civilite);
+        p.mandat       = mandat(p.mandat);
     });
 
     return newParrainages;
