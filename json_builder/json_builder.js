@@ -159,11 +159,11 @@ const chomage = (taux) => {
 
 const mandat = (mdt) => {
     if (
-        mdt === 'Maire'                          || 
-        mdt === 'Conseiller/ère départemental-e' || 
-        mdt === 'Conseiller/ère régional-e'      || 
-        mdt === 'Maire délégué-e'                || 
-        mdt === 'Député-e'                       || 
+        mdt === 'Maire'                          ||
+        mdt === 'Conseiller/ère départemental-e' ||
+        mdt === 'Conseiller/ère régional-e'      ||
+        mdt === 'Maire délégué-e'                ||
+        mdt === 'Député-e'                       ||
         mdt === 'Sénateur/trice'
     ) {
         return mdt;
@@ -220,6 +220,7 @@ const readParrainages = (parrainages) => {
         p.chomage      = chomage(stringToFloat(p.taux_chomage));
         p.sexe         = gender(p.civilite);
         p.mandat       = mandat(p.mandat);
+        p.maire        = p.mandat === 'Maire';
     });
 
     return newParrainages;
