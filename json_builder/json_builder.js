@@ -2,6 +2,7 @@ const mysql       = require('mysql');
 const dotenv      = require('dotenv');
 const fs          = require('fs');
 const moment      = require('moment');
+const _           = require('underscore');
 
 dotenv.config({path:'../.env'});
 
@@ -38,6 +39,31 @@ const candidats = [
     "TEMARU Oscar",
     "YADE Rama"
 ];
+
+const LISTS_ORDER = {
+    LEXG:            1,
+    LCOM:            2,
+    LFG:             3,
+    LPG:             4,
+    LSOC:            5,
+    LUG:             6,
+    LDVG:            7,
+    LVEC:            8,
+    LMDM:            9,
+    LUC:             10,
+    LUDI:            11,
+    LDVD:            12,
+    LUD:             13,
+    LUMP:            14,
+    LFN:             15,
+    LEXD:            16,
+    LDIV:            17,
+    LSE:             20,
+};
+
+const getListeOrder = (liste) => {
+    return LISTS_ORDER[liste] || 20;
+};
 
 const stringToInt = (n) => {
     if (typeof n === 'string') {
@@ -223,7 +249,7 @@ const readParrainages = (parrainages) => {
         p.maire        = p.mandat === 'Maire';
     });
 
-    return newParrainages;
+    return _.sortBy(newParrainages, (p) => getListeOrder(p.liste));
 };
 
 const getCandidateInfo = (connection) => (candidat) => Promise.all(
@@ -240,7 +266,7 @@ const getCandidateInfo = (connection) => (candidat) => Promise.all(
 
 const saveResults = (result) =>  new Promise((resolve, reject) => {
     const data = {};
-    result.forEach( function(element) {
+    result.forEach((element) => {
         data[element.name] = element;
     });
 
