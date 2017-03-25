@@ -4,6 +4,8 @@ const fs          = require('fs');
 const moment      = require('moment');
 const _           = require('underscore');
 
+const statsHelper = require('./stats');
+
 dotenv.config({path:'../.env'});
 
 const NOW = moment().year();
@@ -264,12 +266,26 @@ const getCandidateInfo = (connection) => (candidat) => Promise.all(
     parrainages:       readParrainages(results[0].parrainages),
 }));
 
-const saveResults = (result) =>  new Promise((resolve, reject) => {
-    const data = {};
-    result.forEach((element) => {
-        data[element.name] = element;
-    });
+const addStats = (results) => {
+    const
+        parrains = _.flatten(
+            Object.values(results.candidats).map((c) => c.parrainages)
+        ),
+        maires   = parrains.filter((p) => p.maire);
 
+    const stats = {
+        all:    statsHelper.buildStatsAll(parrains),
+        maires: statsHelper.buildStatsMaires(maires),
+    };
+
+    return {
+        stats,
+        candidats: results.candidats,
+    };
+};
+
+const saveResults = (data) =>  new Promise((resolve, reject) => {
+    console.log(data.stats);
     fs.writeFile('parrainages.json', JSON.stringify(data), (err) => {
         if (err) {
             reject(err);
@@ -290,6 +306,17 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 
     Promise.all(candidats.map(getCandidateInfo(connection)))
+        .then((result) => {
+            const data = {};
+            result.forEach((element) => {
+                data[element.name] = element;
+            });
+
+            return {
+                candidats: data,
+            };
+        })
+        .then(addStats)
         .then(saveResults)
         .catch(console.error)
         .then(() => {
