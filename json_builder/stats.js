@@ -1,6 +1,17 @@
 
 const _ = require('underscore');
 
+const SELECTOR_GENDER   = 'SELECTOR_GENDER';
+const SELECTOR_AGE      = 'SELECTOR_AGE';
+const SELECTOR_CSP      = 'SELECTOR_CSP';
+const SELECTOR_POP      = 'SELECTOR_POP';
+const SELECTOR_URBANITE = 'SELECTOR_URBANITE';
+const SELECTOR_CHOMAGE  = 'SELECTOR_CHOMAGE';
+const SELECTOR_LISTE    = 'SELECTOR_LISTE';
+
+const SELECTOR_TYPE       = 'SELECTOR_TYPE';
+const SELECTOR_GENDER_ALL = 'SELECTOR_GENDER_ALL';
+
 const GENDER_LABELS = [
     'Hommes',
     'Femmes',
@@ -128,22 +139,16 @@ const buildTypeData = (parrains) => {
     return buildRawData(TYPE_LABELS, groups);
 };
 
-const buildStatsAll = (parrains) => ({
-    type:   buildTypeData(parrains),
-    gender: buildGenderData(parrains),
+const buildStats = (allParrains, maires) => ({
+    SELECTOR_GENDER:     buildGenderData(maires),
+    SELECTOR_AGE:        buildAgeData(maires),
+    SELECTOR_CSP:        buildCSPData(maires),
+    SELECTOR_POP:        buildPopData(maires),
+    SELECTOR_URBANITE:   buildUrbaniteData(maires),
+    SELECTOR_CHOMAGE:    buildChomageData(maires),
+    SELECTOR_TYPE:       buildTypeData(allParrains),
+    SELECTOR_GENDER_ALL: buildGenderData(allParrains),
 });
 
-const buildStatsMaires = (parrains) => ({
-    gender:    buildGenderData(parrains),
-    age:       buildAgeData(parrains),
-    csp:       buildCSPData(parrains),
-    pop:       buildPopData(parrains),
-    urbainite: buildUrbaniteData(parrains),
-    chomage:   buildChomageData(parrains),
-});
-
-module.exports = {
-    buildStatsAll,
-    buildStatsMaires,
-};
+module.exports = buildStats;
 

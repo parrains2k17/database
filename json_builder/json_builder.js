@@ -4,7 +4,7 @@ const fs          = require('fs');
 const moment      = require('moment');
 const _           = require('underscore');
 
-const statsHelper = require('./stats');
+const buildStats = require('./stats');
 
 dotenv.config({path:'../.env'});
 
@@ -268,18 +268,14 @@ const getCandidateInfo = (connection) => (candidat) => Promise.all(
 
 const addStats = (results) => {
     const
-        parrains = _.flatten(
+        allParrains = _.flatten(
             Object.values(results.candidats).map((c) => c.parrainages)
         ),
-        maires   = parrains.filter((p) => p.maire);
+        maires   = allParrains.filter((p) => p.maire);
 
-    const stats = {
-        all:    statsHelper.buildStatsAll(parrains),
-        maires: statsHelper.buildStatsMaires(maires),
-    };
 
     return {
-        stats,
+        stats: buildStats(allParrains, maires),
         candidats: results.candidats,
     };
 };
