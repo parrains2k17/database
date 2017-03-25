@@ -12,6 +12,18 @@ const SELECTOR_LISTE    = 'SELECTOR_LISTE';
 const SELECTOR_TYPE       = 'SELECTOR_TYPE';
 const SELECTOR_GENDER_ALL = 'SELECTOR_GENDER_ALL';
 
+const selectors = [
+    SELECTOR_GENDER,
+    SELECTOR_AGE,
+    SELECTOR_CSP,
+    SELECTOR_POP,
+    SELECTOR_URBANITE,
+    SELECTOR_CHOMAGE,
+    SELECTOR_LISTE,
+    SELECTOR_TYPE,
+    SELECTOR_GENDER_ALL,
+];
+
 const GENDER_LABELS = [
     'Hommes',
     'Femmes',
@@ -139,7 +151,7 @@ const buildTypeData = (parrains) => {
     return buildRawData(TYPE_LABELS, groups);
 };
 
-const buildStats = (allParrains, maires) => ({
+const buildCandidateStats = (allParrains, maires) => ({
     SELECTOR_GENDER:     buildGenderData(maires),
     SELECTOR_AGE:        buildAgeData(maires),
     SELECTOR_CSP:        buildCSPData(maires),
@@ -150,5 +162,39 @@ const buildStats = (allParrains, maires) => ({
     SELECTOR_GENDER_ALL: buildGenderData(allParrains),
 });
 
-module.exports = buildStats;
+const averageStats = (candidats) => {
+    const stats = {};
+    const nbCandidats = Object.values(candidats).length;
+
+    selectors.forEach((selector) => {
+        console.log(selector);
+        const selectorStat = Object.values(candidats)
+            .reduce((stat, candidat) => {
+                const selectorData = candidat.stats[selector];
+
+                if (!selectorData) {
+                    return stat;
+                }
+
+                Object.keys(selectorData).forEach((key) => {
+                    if (!stat[key]) {
+                        stat[key] = 0;
+                    }
+                    stat[key] += selectorData[key] / nbCandidats;
+                });
+
+                return stat;
+            }, {});
+
+
+        stats[selector] = selectorStat;
+    });
+
+    return stats;
+};
+
+module.exports = {
+    buildCandidateStats,
+    averageStats,
+};
 
