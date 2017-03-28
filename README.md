@@ -1,8 +1,10 @@
 
-MySQL database used for the Hyblab project
-==========================================
+Data work of the Parrains2017 project
+======================================
 
-# Run with docker
+The idea here is to run a big SQL query then generate a pretty JSON file.
+
+# Run the MYSQL database with docker
 
 ```
 cp .env.default .env
@@ -18,6 +20,18 @@ Import corresponding data from .csv files (be sure float use '.' and not ',').
 
 # Sources
 
-See `./sources/`.
+Data sources :
+    - [Conseil Constitutionnel](https://presidentielle2017.conseil-constitutionnel.fr/les-parrainages/tous-les-parrainages/)
+    - [Data.gouv.fr](https://www.data.gouv.fr/fr/)
 
-`TODO` list sources here + Licence
+See `./sources/` for files.
+
+# Build the JSON
+
+```
+cd json_builder
+node -v # >= 7.4
+npm install
+node json_builder.js
+```
+
