@@ -25,63 +25,63 @@ const selectors = [
 ];
 
 const GENDER_LABELS = [
-    'Hommes',
-    'Femmes',
+    'Men',
+    'Women',
 ];
 
 const CSP_LABELS = [
-    'Professions agricoles',
-    'Salariés du privé',
-    'Professions libérales',
-    'Professions de l\'enseignement',
-    'Personnels des entreprises publiques',
-    'Professions industrielles et commerciales',
-    'Divers',
-    'Retraités',
-    'Inconnue',
+    'Agricultural',
+    'Private sector employees',
+    'Liberal profession',
+    'Education',
+    'Public sector employees',
+    'Industrial and commercial',
+    'Various',
+    'Retired',
+    'Unknown',
 ];
 
 const AGES_LABELS = [
-    'Moins de 29 ans',
-    '30 à 44 ans',
-    '45 à 59 ans',
-    '60 à 74 ans',
-    '75 ans et plus',
-    'Inconnu',
+    'Less than 29',
+    '30 to 44',
+    '45 to 59',
+    '60 to 74',
+    '75 and more',
+    'Unknown',
 ];
 
 const POPULATION_LABELS = [
-    'Inconnue',
-    '0 à 199 habitants',
-    '200 à 399 habitants',
-    '400 à 999 habitants',
-    '1 000 à 2 000 habitants',
-    '2 000 à 10 000 habitants',
-    'Plus de 10 000 habitants',
+    'Unknown',
+    '0 to 199',
+    '200 to 399',
+    '400 to 999',
+    '1 000 to 2 000',
+    '2 000 to 10 000',
+    'More than 10 000',
 ];
 
 const URBANITE_LABELS = [
-    'Inconnu',
-    'Urbaine',
-    'Rurale',
+    'Unknown',
+    'Urban',
+    'Rural',
 ];
 
 const CHOMAGE_LABELS = [
-    'Inconnu',
-    'Moins de 5%',
-    'Entre 5 et 10%',
-    'Entre 10 et 15%',
-    'Plus de 15%',
+    'Unknown',
+    'Less than 5%',
+    'Between 5 and 10%',
+    'Between 10 and 15%',
+    'More than 15%',
 ];
 
 const TYPE_LABELS = [
-    'Autre',
-    'Maire',
-    'Conseiller/ère départemental-e',
-    'Conseiller/ère régional-e',
-    'Maire délégué-e',
-    'Député-e',
-    'Sénateur/trice',
+    'Other',
+    'Mayor',
+    'Departmental councillor',
+    'Regional councillor',
+    'Deputy Mayor',
+    'Deputy',
+    'Senator',
 ];
 
 const buildRawData = (labels, groups) => _.object(labels, labels.map(

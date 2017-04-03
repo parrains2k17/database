@@ -85,104 +85,121 @@ const stringToFloat = (n) => {
 
 const gender = (code) => {
     if (code === null || code === undefined) {
-        return 'Inconnu';
+        return 'Unknown';
     }
 
-    return code === 'Mme' ? 'Femmes' : 'Hommes';
+    return code === 'Mme' ? 'Women' : 'Men';
 };
 
 const age = (n) => {
     if (n === null || n === undefined) {
-        return 'Inconnu';
+        return 'Unknown';
     }
 
     if (n < 29) {
-        return 'Moins de 29 ans';
+        return 'Less than 29';
     } else if (n < 44) {
-        return '30 à 44 ans';
+        return '30 to 44';
     } else if (n < 59) {
-        return '45 à 59 ans';
+        return '45 to 59';
     } else if (n < 74) {
-        return '60 à 74 ans';
+        return '60 to 74';
     } else if (n >= 74) {
-        return '75 ans et plus';
+        return '75 and more';
     }
 
-    return 'Inconnu';
+    return 'Unknown';
 };
 
 const csp = (code) => {
     if (code === null || code === undefined) {
-        return 'Inconnue';
+        return 'Unknown';
     }
 
     if (code < 5) {
-        return 'Professions agricoles';
+        return 'Agricultural';
     } else if (code < 13) {
-        return 'Professions industrielles et commerciales';
+        return 'Industrial and commercial';
     } else if (code < 24) {
-        return 'Salariés du privé';
+        return 'Private sector employees';
     } else if (code < 40) {
-        return 'Professions libérales';
+        return 'Liberal profession';
     } else if (code < 45) {
-        return 'Professions de l\'enseignement';
+        return 'Education';
     } else if (code < 54) {
-        return 'Personnels des entreprises publiques';
+        return 'Public sector employees';
     } else if (code < 58) {
-        return 'Divers';
+        return 'Various';
     } else if (code >= 58) {
-        return 'Retraités';
+        return 'Retired';
     }
 
-    return 'Inconnue';
+    return 'Unknown';
 };
 
 const population = (pop) => {
     if (pop === null || pop === undefined) {
-        return 'Inconnue';
+        return 'Unknow';
     }
 
     if (pop < 200) {
-        return '0 à 199 habitants';
+        return '0 to 199';
     } else if (pop < 400) {
-        return '200 à 399 habitants';
+        return '200 to 399';
     } else if (pop < 1000) {
-        return '400 à 999 habitants';
+        return '400 to 999';
     } else if (pop < 2000) {
-        return '1 000 à 2 000 habitants';
+        return '1 000 to 2 000';
     } else if (pop < 10000) {
-        return '2 000 à 10 000 habitants';
+        return '2 000 to 10 000';
     } else if (pop < 40000000) {
-        return 'Plus de 10 000 habitants';
+        return 'More than 10 000';
     }
 
-    return 'Inconnue';
+    return 'Unknow';
 };
 
 const urbanite = (score) => {
     if (score === null || score === undefined) {
-        return 'Inconnu';
+        return 'Unknown';
     }
 
-    return (score > 0) ? 'Urbaine' : 'Rurale';
+    return (score > 0) ? 'Urban' : 'Rural';
 };
 
 const chomage = (taux) => {
     if (taux === null || taux === undefined) {
-        return 'Inconnu';
+        return 'Unknown';
     }
 
     if (taux < 5) {
-        return 'Moins de 5%';
+        return 'Less than 5%';
     } else if (taux < 10) {
-        return 'Entre 5 et 10%';
+        return 'Between 5 and 10%';
     } else if (taux < 15) {
-        return 'Entre 10 et 15%';
+        return 'Between 10 and 15%';
     } else if (taux >= 15) {
-        return 'Plus de 15%';
+        return 'More than 15%';
     }
 
-    return 'Inconnu';
+    return 'Unknown';
+};
+
+const translateMandat = (mdt) => {
+    switch (mdt) {
+        case 'Maire':
+            return 'Mayor';
+        case 'Conseiller/ère départemental-e':
+            return 'Departmental councillor';
+        case 'Conseiller/ère régional-e':
+            return 'Regional councillor';
+        case 'Maire délégué-e':
+            return 'Deputy Mayor';
+        case 'Député-e':
+            return 'Deputy';
+        case 'Sénateur/trice':
+            return 'Senator';
+    }
 };
 
 const mandat = (mdt) => {
@@ -194,10 +211,10 @@ const mandat = (mdt) => {
         mdt === 'Député-e'                       ||
         mdt === 'Sénateur/trice'
     ) {
-        return mdt;
+        return translateMandat(mdt);
     }
 
-    return 'Autre';
+    return 'Other';
 };
 
 const getCandidateSupporters = (connection) => (candidat) => new Promise((resolve, reject) => {
@@ -248,7 +265,7 @@ const readParrainages = (parrainages) => {
         p.chomage      = chomage(stringToFloat(p.taux_chomage));
         p.sexe         = gender(p.civilite);
         p.mandat       = mandat(p.mandat);
-        p.maire        = p.mandat === 'Maire';
+        p.maire        = p.mandat === 'Mayor';
     });
 
     return _.sortBy(newParrainages, (p) => getListeOrder(p.liste));
